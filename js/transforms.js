@@ -1,3 +1,5 @@
+/// <reference path="external/additions.d.ts" />
+
 function patientToImageStackCenter() {
     return additions.Matrix4.makeTranslation(
         parameters.mpr.patientToStackCenterX,

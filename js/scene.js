@@ -1,3 +1,5 @@
+/// <reference path="external/additions.d.ts" />
+
 function buildScene() {
     var scene = new THREE.Scene();
     scene.scale.set(0.01, 0.01, 0.01);
@@ -14,7 +16,7 @@ function buildScene() {
     var patientGroup = new THREE.Object3D;
     patientGroup.matrixAutoUpdate = false;
     patientGroup.matrix = threeToPatient();
-    patientGroup.add(new Axis(100));
+    patientGroup.add(new additions.Axis(100));
     scene.add(patientGroup);
     
     // Create an additional group to represent image stack centre space

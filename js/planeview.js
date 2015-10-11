@@ -1,3 +1,5 @@
+/// <reference path="external/additions.d.ts" />
+
 var PlaneView = function (containerElementId) {
     "use strict";
     
@@ -20,11 +22,11 @@ var PlaneView = function (containerElementId) {
         scene.imageStackCentreGroup.matrix = patientToImageStackCenter();
         viewPlaneCentreGroup.matrix = imageStackCenterToImage();
         
-        var rotation = Matrix4(viewPlaneCentreGroup.matrix).extractRotation();
+        var rotation = Matrix4.extractRotation(viewPlaneCentreGroup.matrix);
         // Thanks to http://gamedev.stackexchange.com/questions/27003/flip-rotation-matrix
         // for the hint here. The rotation is applied around patient space axes, so
         // we need to apply it in that space.
-        var flip = Matrix4(threeToPatient());
+        var flip = new Matrix4(threeToPatient());
         // Note that flip is also its own inverse, so this is really:
         // flipInv * rotation * flip 
         rotation = flip.multiply(rotation).multiply(flip);
@@ -32,7 +34,7 @@ var PlaneView = function (containerElementId) {
         // Update the matrices manually (as we've told threejs that we want this so we can
         // set them manually)
         scene.scene.updateMatrixWorld(true);
-        var translation = Matrix4(viewPlaneCentreGroup.matrixWorld).copyPosition();
+        var translation = Matrix4.copyPosition(viewPlaneCentreGroup.matrixWorld);
         camera.matrix = translation.multiply(rotation);
         camera.updateMatrixWorld(true);
     };

@@ -1,3 +1,5 @@
+/// <reference path="external/additions.d.ts" />
+
 var PatientView = function (containerElementId, gui) {
     "use strict";
     
